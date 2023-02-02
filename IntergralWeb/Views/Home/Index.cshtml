@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "Лаб. робота №1";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+@{
+    <div class="flex-lg-wrap">
+        <div class="form-floating">
+            <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Input equation</label>
+        </div>
+        <div class="form-floating">
+            <button asp-page-hander type="button" class="btn btn-primary float-right mt-2">Proceed</button>
+        </div>
+        <div class="form-floating mb-3 mt-2">
+            <input type="text" readonly class="form-control-plaintext" id="floatingPlaintextInput" placeholder="" value="">
+            <label for="floatingPlaintextInput"></label>
+        </div>
+    </div>
+}
+
