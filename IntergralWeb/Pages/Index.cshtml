@@ -1,0 +1,19 @@
+﻿@page
+@using IntegralApi.Model
+@model IntegralModel?
+@{
+    ViewData["Title"] = "Лаб. робота №1";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="flex-lg-wrap">
+    <form method="post">
+    <div class="form-floating">
+        <textarea class="form-control" name="expression" style="height: 100px"></textarea>
+        <label>Input equation</label>
+    </div>
+    <div class="form-floating">
+        <button asp-controller="Home" asp-action="Proceed" type="submit" class="btn btn-primary float-right mt-2">Proceed</button>
+    </div>
+    </form>
+</div>

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegralApi", "IntegralApi\IntegralApi.csproj", "{4799764F-9993-4DC5-8DEA-BEEC9A410B4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegralApi", "IntegralApi\IntegralApi.csproj", "{4799764F-9993-4DC5-8DEA-BEEC9A410B4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntergralWeb", "IntergralWeb\IntergralWeb.csproj", "{C2B643DA-FD73-46E7-A6B5-FF2A29B9EC09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntergralWeb", "IntergralWeb\IntergralWeb.csproj", "{C2B643DA-FD73-46E7-A6B5-FF2A29B9EC09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

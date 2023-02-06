@@ -14,4 +14,8 @@
     <ProjectReference Include="..\IntegralApi\IntegralApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

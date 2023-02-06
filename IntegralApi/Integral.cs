@@ -4,17 +4,20 @@ using System.Web;
 
 namespace IntegralApi
 {
-    static class Integral
+    public static class Integral
     {
-        public static async Task<string> Get(string equation)
+        public static async Task<IntegralModel> Get(string equation)
         {
+            string url = $"https://newton.vercel.app/api/v2/integrate/{HttpUtility.UrlEncode(equation)}";
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync($"https://newton.vercel.app/api/v2/integrate/{HttpUtility.UrlEncode(equation)}"))
+                using (var response = await httpClient.GetAsync(url))
                 {
 
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<IntegralModel>(apiResponse)?.Result ?? "";
+                    IntegralModel model =  JsonConvert.DeserializeObject<IntegralModel>(apiResponse) ?? new IntegralModel();
+                    model.Operation = url;
+                    return model;
                 }
             }
         }

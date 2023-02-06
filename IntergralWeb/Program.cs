@@ -24,7 +24,7 @@ app.UseEndpoints(endpoints =>
             name: "default",
             pattern: "{controller=Home}/{action=Index}/");
 });
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapRazorPages();
 

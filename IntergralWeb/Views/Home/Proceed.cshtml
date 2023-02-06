@@ -1,0 +1,17 @@
+﻿@model IntegralApi.Model.IntegralModel
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div class="list-group-item mb-3">
+    <input type="text" readonly class="form-control-plaintext" placeholder="" value="@(Model.Expression)">
+    <label for="floatingPlaintextInput"></label>
+</div>
+<div class="list-group-item mb-3 mt-2">
+    <input type="text" readonly class="form-control-plaintext" placeholder="" value="@(Model.Result)">
+    <label for="floatingPlaintextInput"></label>
+</div>
+<div class="list-group-item mt-2">
+    <input type="text" readonly class="form-control-plaintext" placeholder="" value="@(Model.Operation)">
+    <label for="floatingPlaintextInput"></label>
+</div>
