@@ -6,7 +6,7 @@ namespace IntegralApi
 {
     public static class Integral
     {
-        public static async Task<IntegralModel> Get(string equation)
+        public static async Task<IntegralModel> GetAsync(string equation)
         {
             string url = $"https://newton.vercel.app/api/v2/integrate/{HttpUtility.UrlEncode(equation)}";
             using (var httpClient = new HttpClient())

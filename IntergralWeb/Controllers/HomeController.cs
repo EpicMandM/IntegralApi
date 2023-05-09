@@ -1,19 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using IntegralApi;
 using IntegralApi.Model;
+using Microsoft.AspNetCore.Hosting;
+
 namespace IntergralWeb.Controllers
 {
+    [Route("[controller]")]
     public class HomeController : Controller
     {
         [HttpGet]
-        public IActionResult Index()
+        [Route("")]
+        public IActionResult Index(IWebHostEnvironment webHostEnvironment)
         {
-            return View();
+            var filePath = Path.Combine(webHostEnvironment.ContentRootPath, "StaticPages", "index.html");
+            return PhysicalFile(filePath, "text/html");
         }
+
         [HttpPost]
-        public IActionResult Proceed(string expression)
+        [Route("proceed")]
+        public async Task<IActionResult> Proceed(string expression)
         {
-            return View(Integral.Get(expression ?? "").Result);
+            return View(await Integral.GetAsync(expression ?? ""));
         }
     }
 }
