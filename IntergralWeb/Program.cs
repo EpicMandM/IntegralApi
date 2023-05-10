@@ -1,9 +1,14 @@
-using System.Web.Http;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.FileProviders;
+using System.Linq;
 
+var builder = WebApplication.CreateBuilder(args); // Pass args here.
 
-var builder = WebApplication.CreateBuilder();
+var portArg = builder.Configuration.GetValue<string>("port"); // Get the port argument value.
+
+// If no port argument provided, use a default port.
+var port = int.Parse(string.IsNullOrWhiteSpace(portArg) ? "5000" : portArg);
+
+builder.WebHost.UseUrls($"http://*:{port}");
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -19,8 +24,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 
 }
-
-app.UseHttpsRedirection();
+app.UseRouting();
 var options = new DefaultFilesOptions();
 options.DefaultFileNames.Clear();
 options.DefaultFileNames.Add("index.html");
@@ -40,6 +44,9 @@ app.UseStaticFiles(new StaticFileOptions
         Path.Combine(app.Environment.ContentRootPath, "wwwroot/js")),
     RequestPath = ""
 });
+
+app.UseRouting();
+app.MapControllers();
 app.UseStaticFiles();
 app.Run();
 
