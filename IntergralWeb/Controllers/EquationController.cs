@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using IntegralApi;
+using System.Net;
+
 namespace IntergralWeb.Controllers
 {
     [ApiController]
@@ -10,7 +12,7 @@ namespace IntergralWeb.Controllers
         [Route("{equation}")]
         public async Task<ActionResult<string>> Get(string equation)
         {
-            return Ok(await Integral.GetAsync(equation));
+            return Ok(await Integral.GetAsync(WebUtility.UrlDecode(equation)));
         }
     }
 }

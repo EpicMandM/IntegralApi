@@ -7,29 +7,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlDiv = document.getElementById('url');
     const resultSection = resultDiv.parentElement;
 
+    let retryCount = 0;
+    const maxRetries = 3;
 
-    proceedButton.addEventListener('click', async () => {
-        const equation = encodeURIComponent(equationInput.value);
-        //const apiUrl = `~/api/equation/${equation}`;
-        const apiUrl = `https://newton.vercel.app/api/v2/integrate/${equation}`;
-        
-
-        try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                throw new Error(`HTTP error ${response.status}`);
+    function fetchApi(apiUrl) {
+        $.ajax({
+            url: apiUrl,
+            type: 'GET',
+            success: function (result) {
+                resultDiv.textContent = result.result;
+                urlDiv.textContent = apiUrl;
+                urlDiv.href = apiUrl;
+                resultSection.removeAttribute('hidden');
+                urlDiv.removeAttribute('hidden');
+                retryCount = 0; // reset retry count after successful fetch
+            },
+            error: function (xhr, status, error) {
+                if (retryCount < maxRetries) {
+                    retryCount++;
+                    setTimeout(() => fetchApi(apiUrl), 1000); // retry after 1 second
+                } else {
+                    console.error('Error fetching the API:', error);
+                    resultDiv.textContent = 'Error occurred, please try again.';
+                    resultDiv.removeAttribute('hidden');
+                    urlDiv.setAttribute('hidden', true);
+                }
             }
-            const result = await response.json()
+        });
+    }
 
-            resultDiv.textContent = result.result;
-            urlDiv.textContent = apiUrl;
-            urlDiv.href = apiUrl;
-            resultSection.removeAttribute('hidden');
-        } catch (error) {
-            console.error('Error fetching the API:', error);
-            resultDiv.textContent = 'Error occurred, please try again.';
-            resultDiv.removeAttribute('hidden');
-            urlDiv.setAttribute('hidden', true);
-        }
+    proceedButton.addEventListener('click', () => {
+        const equation = encodeURIComponent(equationInput.value);
+        const apiUrl = `/api/equation/${equation}`;
+        fetchApi(apiUrl);
     });
 });
